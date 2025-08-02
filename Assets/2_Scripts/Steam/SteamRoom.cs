@@ -13,7 +13,7 @@ public class SteamRoom : NetworkBehaviour
 {
     public delegate void OnChangedDelegate(ulong id, bool isReady);
     
-    public delegate void OnCountChangedDelegate(int count, int target);
+    public delegate void OnCountChangedDelegate(int count);
     
     public event OnChangedDelegate OnDataChanged;
     public event OnCountChangedDelegate OnCountChanged;
@@ -21,8 +21,6 @@ public class SteamRoom : NetworkBehaviour
     private readonly Dictionary<ulong, bool> _readyDict = new Dictionary<ulong, bool>();
 
     private bool _mIsLocalReady;
-
-    private Lobby _mLobby;
 
     private IEnumerator Start()
     {
@@ -32,29 +30,12 @@ public class SteamRoom : NetworkBehaviour
         }
         
         SteamMatchmaking.OnLobbyCreated            -= OnLobbyCreated;
-        SteamMatchmaking.OnLobbyEntered            -= OnLobbyEntered;
         SteamMatchmaking.OnLobbyMemberJoined       -= OnLobbyMemberJoined;
         SteamMatchmaking.OnLobbyMemberDisconnected -= OnLobbyMemberDisconnected;
         
         SteamMatchmaking.OnLobbyCreated            += OnLobbyCreated;
-        SteamMatchmaking.OnLobbyEntered            += OnLobbyEntered;
         SteamMatchmaking.OnLobbyMemberJoined       += OnLobbyMemberJoined;
         SteamMatchmaking.OnLobbyMemberDisconnected += OnLobbyMemberDisconnected;
-        
-        NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
-    }
-
-    //
-    
-    private void OnClientDisconnected(ulong clientId)
-    {
-        Debug.Log($"[Netcode] Client disconnected: {clientId}");
-
-        if (!NetworkManager.Singleton.IsServer)
-        {
-            var disconnectReason = NetworkManager.Singleton.DisconnectReason;
-            Debug.Log($"[Netcode] Disconnect reason: {disconnectReason}");
-        }
     }
     
     //
@@ -67,11 +48,6 @@ public class SteamRoom : NetworkBehaviour
             0, 
             SteamClient.SteamId,
             true);
-    }
-    
-    private void OnLobbyEntered(Lobby lobby)
-    {
-        _mLobby = lobby;
     }
     
     private void OnLobbyMemberJoined(Lobby lobby, Friend friend)
@@ -136,13 +112,9 @@ public class SteamRoom : NetworkBehaviour
         for (int i = 0; i < count; i++)
         {
             _readyDict.Add(ids[i], values[i]);
-            
-            Debug.Log($"{i} : {values[i]}");
         }
         
         _readyDict.Add(id, isServer);
-        
-        Debug.Log($"{id}");
         
         OnDataChanged?.Invoke(id, isServer);
     }
@@ -161,6 +133,6 @@ public class SteamRoom : NetworkBehaviour
         _readyDict[id] = isReady;
         
         OnDataChanged?.Invoke(id, isReady);
-        OnCountChanged?.Invoke(_readyDict.Values.Count(b => b), _mLobby.MemberCount - 1);
+        OnCountChanged?.Invoke(_readyDict.Values.Count(b => b));
     }
 }

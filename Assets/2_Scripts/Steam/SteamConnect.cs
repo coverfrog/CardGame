@@ -78,6 +78,12 @@ public class SteamConnect : MonoBehaviour, ISteamClient
     
     //
 
+    public int MemberCount => CurrentLobby?.MemberCount ?? 0;
+    
+    public int MaxMembers => CurrentLobby?.MaxMembers ?? 0;
+    
+    //
+
     public async void StartHost(
         int maxMembers = 2, 
         Action onSuccess = null, 
@@ -144,5 +150,11 @@ public class SteamConnect : MonoBehaviour, ISteamClient
         CurrentLobby?.Leave();
         
         NetworkManager.Singleton.Shutdown();
+    }
+
+    public void LobbyToPrivate()
+    {
+        CurrentLobby?.SetPrivate();
+        CurrentLobby?.SetJoinable(false);
     }
 }

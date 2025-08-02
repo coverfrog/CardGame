@@ -47,15 +47,13 @@ public class UIRoomStart : MonoBehaviour
     
     //
 
-    public void OnReadyCountChanged(int count, int target)
+    public void OnReadyCountChanged(int count, int memberCount)
     {
-        Debug.Log("OnReadyCountChanged");
-        
         if (!NetworkManager.Singleton.IsServer)
         {
             return;
         }
         
-        mButton.interactable = count >= MinMember && count >= target;
+        mButton.interactable = count >= MinMember && count >= memberCount;
     }
 }

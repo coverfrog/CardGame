@@ -15,8 +15,6 @@ public class UIRoom : MonoBehaviour, IUIModule
     [SerializeField] private UIRoomStart mRoomStart;
     [SerializeField] private UIRoomExit mRoomExit;
 
-    private Lobby _mLobby;
- 
     public IUIModule Init(IUIScene scene)
     {
         _ = mId.Init();
@@ -53,8 +51,8 @@ public class UIRoom : MonoBehaviour, IUIModule
         mPlayerView.OnReadyChanged(id, ready);
     }
 
-    public void OnReadyCountChanged(int count, int target)
+    public void OnReadyCountChanged(int count, int memberCount)
     {
-        mRoomStart.OnReadyCountChanged(count, target);
+        mRoomStart.OnReadyCountChanged(count, memberCount);
     }
 }

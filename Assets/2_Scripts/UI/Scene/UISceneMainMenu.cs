@@ -44,8 +44,6 @@ public class UISceneMainMenu : MonoBehaviour, IUIScene
         return this;
     }
 
-  
-
     public IUIScene Enter()
     {
         _ = mModeSelector.Enter(this);
@@ -104,14 +102,15 @@ public class UISceneMainMenu : MonoBehaviour, IUIScene
         mRoom.OnReadyChanged(id, ready);
     }
     
-    private void OnReadyCountChanged(int count, int target)
+    private void OnReadyCountChanged(int count)
     {
-        mRoom.OnReadyCountChanged(count, target);
+        mRoom.OnReadyCountChanged(count, mSteamConnect.MemberCount);
     }
     
     public void GameStart()
     {
         mSteamRoom.GameStart();
+        mSteamConnect.LobbyToPrivate();
     }
     
     //
