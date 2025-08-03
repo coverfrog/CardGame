@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using Steamworks;
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -12,12 +13,8 @@ public class Card : NetworkBehaviour, ICard
     [SerializeField] private MeshRenderer mRender;
     [SerializeField] private Shader mShader;
 
-    [Header("[ Debug View ]")]
-    [SerializeField] private string mCodeNameString;
-    
-    private readonly NetworkVariable<int> _mIndex =  new NetworkVariable<int>();
-    private readonly NetworkVariable<FixedString128Bytes> _mCodeName = new NetworkVariable<FixedString128Bytes>();
-    
+    [Header("[ Debug View ]")] 
+    [SerializeField] private string mCodeName;
     
     #region Key
 
@@ -39,7 +36,6 @@ public class Card : NetworkBehaviour, ICard
 
     public IObjectPool<ICard> Pool { get; set; }
     
-    
     /// <summary>
     /// 로컬에서 초기화 시키는 단계
     /// </summary>
@@ -50,9 +46,8 @@ public class Card : NetworkBehaviour, ICard
         Data = data;
 
         gameObject.name = Data.DisplayName;
-        
-        _mCodeName.OnValueChanged = OnCodeNameChanged;
-        _mCodeName.Value = data.CodeName;
+
+        mCodeName = data.CodeName;
         
         mRender.sharedMaterial = new Material(mShader);
         mRender.sharedMaterial.SetTexture(FrontTexture, data?.FrontTexture);
@@ -60,20 +55,8 @@ public class Card : NetworkBehaviour, ICard
         return this;
     }
 
-    private void OnCodeNameChanged(FixedString128Bytes prev, FixedString128Bytes now)
-    {
-        mCodeNameString = now.Value;
-    }
-
     public override void OnNetworkSpawn()
     {
-        if (IsServer)
-        {
-            return;
-        }
-        
-        Debug.Log(_mCodeName?.Value.Value);
-        
-        mCodeNameString = _mCodeName?.Value.Value;
+        Debug.Log("클라에서도 호출?");
     }
 }
