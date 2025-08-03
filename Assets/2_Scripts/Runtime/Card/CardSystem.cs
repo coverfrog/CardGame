@@ -86,7 +86,9 @@ public class CardSystem : NetworkBehaviour, ICardSystem
     {
         // [25.08.04][cskim]
         // - 넙겨 받은 정보를 기반으로 모든 유저에게 상태를 최신화 시킨다.
-        // 
+        // - 초기화 자체는 각자 클라이언트에서 진행
+        //      - 초기화가 클라이언트에서 되다보니 우려되는 사항들이 존재
+        //      - 임의의 커스텀 카드 생성 여부
         
         string[] codeNames = codeNameBytes
             .Select(n => n.Value)

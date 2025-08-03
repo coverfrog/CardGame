@@ -37,18 +37,6 @@ public class Card : NetworkBehaviour, ICard
     public IObjectPool<ICard> Pool { get; set; }
 
     /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="data"></param>
-    /// <returns></returns>
-    public ICard Set(CardData data)
-    {
-        Data = data;
-        
-        return this;
-    }
-
-    /// <summary>
     /// 로컬에서 초기화 시키는 단계
     /// </summary>
     /// <param name="data"></param>

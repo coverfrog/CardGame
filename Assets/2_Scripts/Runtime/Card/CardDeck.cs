@@ -101,7 +101,15 @@ public class CardDeck : MonoBehaviour, ICardDeck
 
     public void LoadData(ICard card, string codeName)
     {
-        Debug.Log($"[ {card.Tr.gameObject.name} ] : {codeName} ]");
+        // [25.08.04][cskim]
+        // - 시작할 때 만들어놓은 Data 사전에서 정보 얻어서 로딩
+        // - 객체 초기화는 데이터만 던져주고 객체 안에서 초기화
+        if (!_mCardDataDictionary.TryGetValue(codeName, out CardData data))
+        {
+            throw new Exception("Data not loaded");
+        }
+        
+        _ = card.Init(data);
     }
 
     /// <summary>

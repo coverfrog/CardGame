@@ -15,8 +15,6 @@ public interface ICard
     
     IObjectPool<ICard> Pool { get; set; }
     
-    ICard Set(CardData data);
-    
     ICard Init(CardData data);
 }
 
