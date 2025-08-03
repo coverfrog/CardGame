@@ -59,9 +59,7 @@ public class CardSpawner : ICardSpawner
 
     public ICard Get(CardData data)
     {
-        ICard card = _mPool?.Get();
-
-        card?.Init(data);
+        ICard card = _mPool?.Get().Init(data);
         card?.Network.Spawn();
         
         return card;
