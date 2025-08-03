@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33ff5142-94f0-40e9-8fe5-01206183c804" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CardGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CardGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Runtime/Card/Card.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2_Scripts/Runtime/Card/Card.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Runtime/Card/CardDeck.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2_Scripts/Runtime/Card/CardDeck.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Runtime/Card/CardSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2_Scripts/Runtime/Card/CardSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Runtime/Card/CardSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2_Scripts/Runtime/Card/CardSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Runtime/Card/_Card_Interfaces.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2_Scripts/Runtime/Card/_Card_Interfaces.cs" afterDir="false" />
-    </list>
+    <list default="true" id="33ff5142-94f0-40e9-8fe5-01206183c804" name="변경" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -119,7 +112,7 @@
       <option name="presentableId" value="Default" />
       <updated>1754120790194</updated>
       <workItem from="1754120791629" duration="2983000" />
-      <workItem from="1754212826132" duration="18577000" />
+      <workItem from="1754212826132" duration="18953000" />
     </task>
     <servers />
   </component>

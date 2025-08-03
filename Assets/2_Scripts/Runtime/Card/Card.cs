@@ -13,7 +13,7 @@ public class Card : NetworkBehaviour, ICard
     [SerializeField] private Shader mShader;
 
     [Header("[ Debug View ]")]
-    [SerializeField] private string mCodeName;
+    [SerializeField] private string mCodeNameString;
     
     private readonly NetworkVariable<int> _mIndex =  new NetworkVariable<int>();
     private readonly NetworkVariable<FixedString128Bytes> _mCodeName = new NetworkVariable<FixedString128Bytes>();
@@ -62,11 +62,18 @@ public class Card : NetworkBehaviour, ICard
 
     private void OnCodeNameChanged(FixedString128Bytes prev, FixedString128Bytes now)
     {
-        mCodeName = now.Value;
+        mCodeNameString = now.Value;
     }
 
     public override void OnNetworkSpawn()
     {
-
+        if (!IsServer)
+        {
+            return;
+        }
+        
+        Debug.Log(_mCodeName?.Value.Value);
+        
+        mCodeNameString = _mCodeName?.Value.Value;
     }
 }
