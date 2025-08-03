@@ -15,11 +15,9 @@ public interface ICard
     
     IObjectPool<ICard> Pool { get; set; }
     
+    ICard Set(CardData data);
+    
     ICard Init(CardData data);
-
-    void Init_Net_Rpc(
-        FixedString128Bytes codeName,
-        FixedString128Bytes displayName);
 }
 
 public interface ICardDeck
@@ -37,7 +35,7 @@ public interface ICardDeck
 
 public interface ICardSpawner
 {
-    ICard Get(CardData data);
+    ICard Get();
 }
 
 public interface ICardShuffler

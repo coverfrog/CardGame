@@ -40,12 +40,12 @@ public class CardSpawner : ICardSpawner
 
     private void OnGet(ICard card)
     {
-        card.Tr.gameObject.SetActive(false);
+        
     }
 
     private void OnRelease(ICard card)
     {
-        card.Tr.gameObject.SetActive(false);
+        
     }
 
     private void OnDestroy(ICard card)
@@ -57,13 +57,7 @@ public class CardSpawner : ICardSpawner
 
     #region > ICardSpawner
 
-    public ICard Get(CardData data)
-    {
-        ICard card = _mPool?.Get().Init(data);
-        card?.Network.Spawn();
-        
-        return card;
-    }
-    
+    public ICard Get() => _mPool?.Get();
+
     #endregion
 }

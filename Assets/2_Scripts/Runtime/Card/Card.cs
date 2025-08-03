@@ -35,7 +35,19 @@ public class Card : NetworkBehaviour, ICard
     public CardData Data { get; private set; }
 
     public IObjectPool<ICard> Pool { get; set; }
-    
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
+    public ICard Set(CardData data)
+    {
+        Data = data;
+        
+        return this;
+    }
+
     /// <summary>
     /// 로컬에서 초기화 시키는 단계
     /// </summary>
@@ -52,17 +64,5 @@ public class Card : NetworkBehaviour, ICard
         mRender.sharedMaterial.SetTexture(FrontTexture, data?.FrontTexture);
         
         return this;
-    }
-
-    /// <summary>
-    /// 네트워크 단계에서 값을 다시 초기화
-    /// </summary>
-    [Rpc(SendTo.NotServer)]
-    public void Init_Net_Rpc(
-        FixedString128Bytes codeName,
-        FixedString128Bytes displayName)
-    {
-        gameObject.name = displayName.Value;
-        mCodeName = codeName.Value;
     }
 }

@@ -14,7 +14,6 @@ public class CardDeck : MonoBehaviour, ICardDeck
 
     [Title("Debug View")]
     [ShowInInspector, ReadOnly] private List<CardData> _mCardDataList;
-    [ShowInInspector, ReadOnly] private List<ICard> _mCardList;
 
     private Dictionary<string, CardData> _mCardDataDictionary;
     
@@ -75,28 +74,34 @@ public class CardDeck : MonoBehaviour, ICardDeck
     }
 
     /// <summary>
-    /// 소환
+    /// 소환 ( Server Only )
     /// </summary>
-    public void Spawn(Action<List<ICard>> onSpawn)
+    public void Spawn(Action<ulong[], int> onSpawn)
     {
         // [25.08.03][cskim]
         // - 소환하는 구간
         // - 소환'만' 진행 할 것 
 
         Spawner = new CardSpawner(transform, mPrefab);
-
+        
         int count = _mCardDataList.Count;
         
-        _mCardList = new List<ICard>(count);
-
+        ulong[] result = new ulong[count];
+        
         for (int i = 0; i < count; i++)
         {
-            ICard card = Spawner.Get(_mCardDataList[i]);
-
-            _mCardList.Add(card);
+            ICard card = Spawner.Get();
+            card.Network.Spawn();
+            
+            result[i] = card.Network.NetworkObjectId;
         }
         
-        onSpawn?.Invoke(_mCardList);
+        onSpawn?.Invoke(result, count);
+    }
+
+    public void LoadData(ICard card, string codeName)
+    {
+        Debug.Log($"[ {card.Tr.gameObject.name} ] : {codeName} ]");
     }
 
     /// <summary>

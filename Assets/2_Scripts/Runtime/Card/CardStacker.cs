@@ -27,7 +27,7 @@ public class CardStacker : ICardStacker
             //      - 카드 이동 관련 ( Netcode 위치 동기화로 사용 하여도 됨 )
             
             ICard card = spawner
-                .Get(null)
+                .Get()
                 .Init(data);
             
             float height = unitHeight * i;

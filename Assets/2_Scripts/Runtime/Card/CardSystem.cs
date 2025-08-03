@@ -70,19 +70,39 @@ public class CardSystem : NetworkBehaviour, ICardSystem
         {
             return;
         }
-        
-        mDeck.Spawn(list =>
+
+        mDeck.Spawn((ids, count) =>
         {
-            // [][]
-            foreach (ICard card in list)
-            {
-                string codeName = card.Data.CodeName;
-                string displayName = card.Data.DisplayName;
-                
-                card.Init_Net_Rpc(
-                    new FixedString128Bytes(codeName),
-                    new FixedString128Bytes(displayName));
-            }
+            // [25.08.03][cskim]
+            // - 생성 되었던 codeNames 기반의 순서대로 Instance가 생성
+            // - Instance 생성시 발생되는 NetworkObjectId 를 배열에 넣는다.
+
+            Deck_Info_Set_Rpc(ids, codeNameBytes, count);
         });
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void Deck_Info_Set_Rpc(ulong[] ids, FixedString128Bytes[] codeNameBytes, int count)
+    {
+        // [25.08.04][cskim]
+        // - 넙겨 받은 정보를 기반으로 모든 유저에게 상태를 최신화 시킨다.
+        // 
+        
+        string[] codeNames = codeNameBytes
+            .Select(n => n.Value)
+            .ToArray();
+        
+        for (int i = 0; i < count; i++)
+        {
+            if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(ids[i], out NetworkObject obj))
+            {
+                continue;
+            }
+            
+            if (obj.TryGetComponent(out ICard card))
+            {
+                mDeck.LoadData(card, codeNames[i]);
+            }
+        }
     }
 }
