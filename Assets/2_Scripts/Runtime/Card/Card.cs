@@ -10,14 +10,19 @@ public class Card : NetworkBehaviour, ICard
     [SerializeField] private MeshRenderer mRender;
     [SerializeField] private Shader mShader;
 
-    [Title("Debug View")]
-    [ShowInInspector, ReadOnly] private CardData _mData;
+    private CardData _mData;
     
     #region Key
 
     private static readonly int FrontTexture = Shader.PropertyToID("_Front_Texture");
 
     #endregion
+
+    [ContextMenu("> Context : Report")]
+    public void Report()
+    {
+        Debug.Log(_mData?.CodeName);
+    }
     
     public Transform Tr => transform;
 

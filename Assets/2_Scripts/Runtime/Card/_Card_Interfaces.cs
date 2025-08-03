@@ -30,7 +30,7 @@ public interface ICardDeck
 
 public interface ICardSpawner
 {
-    ICard Get();
+    ICard Get(CardData data);
 }
 
 public interface ICardShuffler

@@ -67,7 +67,7 @@ public class CardSpawner : ICardSpawner
 
     #region > ICardSpawner
 
-    public ICard Get() => _mPool?.Get();
-
+    public ICard Get(CardData data) => _mPool?.Get().Init(data);
+    
     #endregion
 }

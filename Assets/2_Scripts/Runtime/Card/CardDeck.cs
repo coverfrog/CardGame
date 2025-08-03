@@ -14,7 +14,6 @@ public class CardDeck : MonoBehaviour, ICardDeck
 
     [Title("Debug View")]
     [ShowInInspector, ReadOnly] private List<CardData> _mCardDataList;
-    [ShowInInspector, ReadOnly] private List<ICard> _mCardList;
 
     #region > ICardDeck
 
@@ -87,13 +86,9 @@ public class CardDeck : MonoBehaviour, ICardDeck
 
         Spawner = new CardSpawner(transform, mPrefab);
         
-        _mCardList = new List<ICard>();
-        
         foreach (CardData data in _mCardDataList)
         {
-            ICard card = Spawner.Get();
-            
-            _mCardList.Add(card);
+            ICard card = Spawner.Get(data);
         }
     }
 
