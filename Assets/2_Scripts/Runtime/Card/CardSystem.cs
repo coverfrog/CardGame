@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -6,6 +8,9 @@ public class CardSystem : NetworkBehaviour, ICardSystem
     [Header("[ References ]")]
     [SerializeField] private CardDeck mDeck;
 
+    [Header("[ Debug View ]")]
+    [SerializeField] private string[] mCardNames;
+    
     public override void OnNetworkSpawn()
     {
         // 호스트인 경우에만 
@@ -18,17 +23,28 @@ public class CardSystem : NetworkBehaviour, ICardSystem
 #if true
         Debug.Log("카드 시스템 시작");
 #endif
-        
-        // 덱 초기화
+
+        Shuffle();
+    }
+
+    private void Shuffle()
+    {
         // [25.08.03][cskim]
-        // - 클라에서도 '동일하게' 덱 순서 초기화 되는지 확인
-        // - 테스트 종료 후 삭제 요망
-        mDeck.Init();
+        // - 덱 정보 초기화는 서버가 혼자 진행 해야함 ( 동일한 데이터여야 하므로 )
+        // - 그 데이터를 다른 클라에서도 받을 수 있게끔 전송
         
-        // 댁 스폰
-        // [25.08.03][cskim]
-        // - Network Behaviour 안 써도 무방한지 검증 용도
-        // - 테스트 종료 후 삭제 요망
-        mDeck.Stack(null);
+        string[] cardCodeNames = mDeck.Shuffle().Select(d => d.CodeName).ToArray();
+        
+        mCardNames = cardCodeNames;
+        
+        Deck_Shuffle_Rpc(cardCodeNames);
+    }
+    
+    [Rpc(SendTo.NotServer)]
+    private void Deck_Shuffle_Rpc(string[] cardCodeNames)
+    {
+        mCardNames = cardCodeNames;
+        
+        Debug.Log("Call");
     }
 }

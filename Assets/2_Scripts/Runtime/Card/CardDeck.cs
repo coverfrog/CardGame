@@ -28,13 +28,17 @@ public class CardDeck : MonoBehaviour, ICardDeck
         }
         
         Spawner = new CardSpawner(transform, mPrefab);
-        Shuffler = new CardShuffler();
         Stacker = new CardStacker();
 
         if (!mDeckData)
         {
             return;
         }
+    }
+
+    public List<CardData> Shuffle()
+    {
+        Shuffler = new CardShuffler();
         
         var dataList = new List<CardData>();
         foreach (CardDeckData.Option option in mDeckData.OptionList)
@@ -45,7 +49,7 @@ public class CardDeck : MonoBehaviour, ICardDeck
             }   
         }
         
-        _mCardDataList = Shuffler.Shuffle(dataList);
+        return _mCardDataList = Shuffler.Shuffle(dataList);
     }
 
     public void Stack(Action onStack)

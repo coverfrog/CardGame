@@ -17,7 +17,14 @@ public static class SceneBeginAtFirst
         {
             return;
         }
-
+        
+        // [25.08.03][cskim]
+        // - 첫 번째 씬으로 로딩이 이미 되어 있다면 실행시키지 않음
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            return;
+        }
+        
         SceneManager.LoadScene(0);
     }
 }
