@@ -19,6 +19,13 @@ public class CardStacker : ICardStacker
         {
             CardData data = dataList[i];
             
+            // [25.08.03][cskim]
+            // - 카드 소환은 Spawner 에서 객체 관리
+            // - 초기화 시키는 과정과 실제로 움직이는 부분 부터는 클라이언트도 같이 진행 되어야 한다.
+            // - 다음 작업을 Rpc 호출이 필요
+            //      - 카드 초기화 
+            //      - 카드 이동 관련 ( Netcode 위치 동기화로 사용 하여도 됨 )
+            
             ICard card = spawner
                 .Get()
                 .Init(data);

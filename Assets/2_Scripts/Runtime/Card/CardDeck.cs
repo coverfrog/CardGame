@@ -14,6 +14,7 @@ public class CardDeck : MonoBehaviour, ICardDeck
 
     [Title("Debug View")]
     [ShowInInspector, ReadOnly] private List<CardData> _mCardDataList;
+    [ShowInInspector, ReadOnly] private List<ICard> _mCardList;
 
     #region > ICardDeck
 
@@ -75,9 +76,33 @@ public class CardDeck : MonoBehaviour, ICardDeck
         }
     }
 
+    /// <summary>
+    /// 소환
+    /// </summary>
+    public void Spawn()
+    {
+        // [25.08.03][cskim]
+        // - 소환하는 구간
+        // - 소환은 서버에서만 하게 강제 할 것 
+
+        Spawner = new CardSpawner(transform, mPrefab);
+        
+        _mCardList = new List<ICard>();
+        
+        foreach (CardData data in _mCardDataList)
+        {
+            ICard card = Spawner.Get();
+            
+            _mCardList.Add(card);
+        }
+    }
+
+    /// <summary>
+    /// 카드 쌓기 시작
+    /// </summary>
+    /// <param name="onStack"></param>
     public void Stack(Action onStack)
     {
-        Spawner = new CardSpawner(transform, mPrefab);
         Stacker = new CardStacker();
         
         Stacker.Stack(Spawner, _mCardDataList, onStack);

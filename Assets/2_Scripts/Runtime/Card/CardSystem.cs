@@ -57,10 +57,12 @@ public class CardSystem : NetworkBehaviour, ICardSystem
         
         // [25.08.03][cskim]
         // - 카드에 대한 소환 진행 
-        // - 서버에서만 진행
-
-        if (!IsServer) return;
         
-        mDeck.Stack(null);
+        if (!IsServer)
+        {
+            return;
+        }
+        
+        mDeck.Spawn();
     }
 }

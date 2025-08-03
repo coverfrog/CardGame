@@ -1,13 +1,18 @@
+using Sirenix.OdinInspector;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class Card : NetworkBehaviour, ICard
 {
+    [Title("References")]
     [SerializeField] private NetworkObject mNetworkObject;
     [SerializeField] private MeshRenderer mRender;
     [SerializeField] private Shader mShader;
 
+    [Title("Debug View")]
+    [ShowInInspector, ReadOnly] private CardData _mData;
+    
     #region Key
 
     private static readonly int FrontTexture = Shader.PropertyToID("_Front_Texture");
@@ -22,6 +27,8 @@ public class Card : NetworkBehaviour, ICard
     
     public ICard Init(CardData data)
     {
+        _mData = data;
+        
         mRender.sharedMaterial = new Material(mShader);
         mRender.sharedMaterial.SetTexture(FrontTexture, data?.FrontTexture);
         
