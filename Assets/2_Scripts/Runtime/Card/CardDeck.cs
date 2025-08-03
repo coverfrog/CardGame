@@ -99,36 +99,30 @@ public class CardDeck : MonoBehaviour, ICardDeck
         onSpawn?.Invoke(result, count);
     }
 
-    public void LoadData(ICard card, string codeName)
+    public void LoadData(ICard[] cards, string[] codeNames, int count)
     {
         // [25.08.04][cskim]
         // - 시작할 때 만들어놓은 Data 사전에서 정보 얻어서 로딩
         // - 객체 초기화는 데이터만 던져주고 객체 안에서 초기화
-        if (!_mCardDataDictionary.TryGetValue(codeName, out CardData data))
-        {
-            throw new Exception("Data not loaded");
-        }
-        
-        _ = card.Init(data);
-    }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public void SetInfos(int count)
-    {
-        
+        for (int i = 0; i < count; i++)
+        {
+            if (!_mCardDataDictionary.TryGetValue(codeNames[i], out CardData data))
+            {
+                throw new Exception("Data not loaded");
+            }
+            
+            _ = cards[i].Init(data);
+        }
     }
 
     /// <summary>
     /// 카드 쌓기 시작
     /// </summary>
-    /// <param name="onStack"></param>
-    public void Stack(Action onStack)
+    public void Stack(ICard[] cards, Action onEnd)
     {
         Stacker = new CardStacker();
-        
-        Stacker.Stack(Spawner, _mCardDataList, onStack);
+        Stacker.Stack(cards, onEnd);
     }
     
     #endregion

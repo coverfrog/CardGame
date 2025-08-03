@@ -27,8 +27,8 @@ public interface ICardDeck
     ICardStacker Stacker { get; }
     
     void Init();
-    
-    void Stack(Action onStack);
+    //
+    // void Stack(Action onStack);
 }
 
 public interface ICardSpawner
@@ -43,7 +43,7 @@ public interface ICardShuffler
 
 public interface ICardStacker
 {
-    void Stack(ICardSpawner spawner, List<CardData> dataList, Action onStack);
+    void Stack(ICard[] cards, Action onEnd);
 }
 
 public interface ICardSystem

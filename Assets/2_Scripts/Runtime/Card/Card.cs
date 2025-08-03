@@ -45,7 +45,8 @@ public class Card : NetworkBehaviour, ICard
     {
         Data = data;
 
-        gameObject.name = Data.DisplayName;
+        gameObject.SetActive(false);
+        gameObject.name = data.DisplayName;
         mCodeName = data.CodeName;
         
         mRender.sharedMaterial = new Material(mShader);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections;
@@ -89,22 +90,38 @@ public class CardSystem : NetworkBehaviour, ICardSystem
         // - 초기화 자체는 각자 클라이언트에서 진행
         //      - 초기화가 클라이언트에서 되다보니 우려되는 사항들이 존재
         //      - 임의의 커스텀 카드 생성 여부
+        // - 각 데이터 전부 로딩
         
         string[] codeNames = codeNameBytes
             .Select(n => n.Value)
             .ToArray();
         
+        var cards = new ICard[count];
+        
         for (int i = 0; i < count; i++)
         {
             if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(ids[i], out NetworkObject obj))
             {
-                continue;
+                throw new Exception("No NetworkObject found");
             }
             
-            if (obj.TryGetComponent(out ICard card))
+            if (!obj.TryGetComponent(out ICard card))
             {
-                mDeck.LoadData(card, codeNames[i]);
+                throw new Exception("Not found card");
             }
+
+            cards[i] = card;
         }
+        
+        mDeck.LoadData(cards, codeNames, count);
+        
+        // [25.08.04][cskim]
+        // - 댁에 카드가 쌓이는 연출
+        // - 여기까지 정상 진행 여부 확인
+        
+        mDeck.Stack(cards, () =>
+        {
+            
+        });
     }
 }
