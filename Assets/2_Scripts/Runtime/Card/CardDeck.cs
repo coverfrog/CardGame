@@ -77,12 +77,11 @@ public class CardDeck : MonoBehaviour, ICardDeck
     /// <summary>
     /// 소환
     /// </summary>
-    public void Spawn(Action onEnd)
+    public void Spawn(Action<int, ulong> onSpawn)
     {
         // [25.08.03][cskim]
         // - 소환하는 구간
         // - 소환'만' 진행 할 것 
-        // - 서버는 현재 카드에 대한 정보를 들고 있어야 한다.
 
         Spawner = new CardSpawner(transform, mPrefab);
 
@@ -92,10 +91,22 @@ public class CardDeck : MonoBehaviour, ICardDeck
 
         for (int i = 0; i < count; i++)
         {
-            _mCardList.Add(Spawner.Get(_mCardDataList[i]));
+            ICard card = Spawner.Get(_mCardDataList[i]);
+
+            ulong id = card.Network.NetworkObjectId;
+            
+            onSpawn?.Invoke(i, id);
+            
+            _mCardList.Add(card);
         }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void SetInfos(int count)
+    {
         
-        onEnd?.Invoke();
     }
 
     /// <summary>

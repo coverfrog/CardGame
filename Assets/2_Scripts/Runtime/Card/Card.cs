@@ -1,16 +1,23 @@
 using Sirenix.OdinInspector;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Pool;
+using ReadOnly = Sirenix.OdinInspector.ReadOnlyAttribute;
 
 public class Card : NetworkBehaviour, ICard
 {
-    [Title("References")]
+    [Header("[ References ]")]
     [SerializeField] private NetworkObject mNetworkObject;
     [SerializeField] private MeshRenderer mRender;
     [SerializeField] private Shader mShader;
 
-    private CardData _mData;
+    [Header("[ Debug View ]")]
+    [SerializeField] private string mCodeName;
+    
+    private readonly NetworkVariable<int> _mIndex =  new NetworkVariable<int>();
+    private readonly NetworkVariable<FixedString128Bytes> _mCodeName = new NetworkVariable<FixedString128Bytes>();
+    
     
     #region Key
 
@@ -21,18 +28,31 @@ public class Card : NetworkBehaviour, ICard
     [ContextMenu("> Context : Report")]
     public void Report()
     {
-        Debug.Log(_mData?.CodeName);
+        Debug.Log(Data?.CodeName);
     }
     
     public Transform Tr => transform;
 
     public NetworkObject Network => mNetworkObject;
+    
+    public CardData Data { get; private set; }
 
     public IObjectPool<ICard> Pool { get; set; }
     
+    
+    /// <summary>
+    /// 로컬에서 초기화 시키는 단계
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
     public ICard Init(CardData data)
     {
-        _mData = data;
+        Data = data;
+
+        gameObject.name = Data.DisplayName;
+        
+        _mCodeName.OnValueChanged = OnCodeNameChanged;
+        _mCodeName.Value = data.CodeName;
         
         mRender.sharedMaterial = new Material(mShader);
         mRender.sharedMaterial.SetTexture(FrontTexture, data?.FrontTexture);
@@ -40,8 +60,13 @@ public class Card : NetworkBehaviour, ICard
         return this;
     }
 
-    public void Spawn()
+    private void OnCodeNameChanged(FixedString128Bytes prev, FixedString128Bytes now)
     {
-        
+        mCodeName = now.Value;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+
     }
 }

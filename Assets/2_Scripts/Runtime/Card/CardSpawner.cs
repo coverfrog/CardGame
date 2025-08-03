@@ -62,10 +62,10 @@ public class CardSpawner : ICardSpawner
         ICard card = _mPool?.Get();
 
         card?.Init(data);
-        card?.Network?.Spawn();
+        card?.Network.Spawn();
         
         return card;
     }
-
+    
     #endregion
 }

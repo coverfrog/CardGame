@@ -10,6 +10,8 @@ public interface ICard
     
     NetworkObject Network { get; }
     
+    CardData Data { get; }
+    
     IObjectPool<ICard> Pool { get; set; }
     
     ICard Init(CardData data);
