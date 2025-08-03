@@ -1,8 +1,10 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class Card : MonoBehaviour, ICard
+public class Card : NetworkBehaviour, ICard
 {
+    [SerializeField] private NetworkObject mNetworkObject;
     [SerializeField] private MeshRenderer mRender;
     [SerializeField] private Shader mShader;
 
@@ -13,7 +15,9 @@ public class Card : MonoBehaviour, ICard
     #endregion
     
     public Transform Tr => transform;
-    
+
+    public NetworkObject Network => mNetworkObject;
+
     public IObjectPool<ICard> Pool { get; set; }
     
     public ICard Init(CardData data)
@@ -22,5 +26,10 @@ public class Card : MonoBehaviour, ICard
         mRender.sharedMaterial.SetTexture(FrontTexture, data?.FrontTexture);
         
         return this;
+    }
+
+    public void Spawn()
+    {
+        
     }
 }

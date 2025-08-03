@@ -30,13 +30,7 @@ public class CardDeck : MonoBehaviour, ICardDeck
             throw new NullReferenceException("Card prefab is null");    
         }
         
-        Spawner = new CardSpawner(transform, mPrefab);
-        Stacker = new CardStacker();
-
-        if (!mDeckData)
-        {
-            return;
-        }
+  
     }
 
     /// <summary>
@@ -83,6 +77,9 @@ public class CardDeck : MonoBehaviour, ICardDeck
 
     public void Stack(Action onStack)
     {
+        Spawner = new CardSpawner(transform, mPrefab);
+        Stacker = new CardStacker();
+        
         Stacker.Stack(Spawner, _mCardDataList, onStack);
     }
     

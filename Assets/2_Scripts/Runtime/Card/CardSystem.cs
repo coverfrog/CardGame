@@ -46,14 +46,21 @@ public class CardSystem : NetworkBehaviour, ICardSystem
     private void Deck_Shuffle_Rpc(FixedString128Bytes[] codeNameBytes)
     {
         // [25.08.03][cskim]
-        // - 시점 : 카드 정보 갱신을 완료 
-        // - 덱을 스폰
-        // - 카드는 서버에서만 소환 ( 코드 네임 기반으로 정보 전달 )
+        // - 갱신된 카드 덱의 정보 인덱스를 전파
+        // - 각 값에 대한 갱신은 클라이언트에서 진행
         
         string[] codeNames = codeNameBytes
             .Select(n => n.Value)
             .ToArray();
 
         mDeck.OnShuffle(codeNames);
+        
+        // [25.08.03][cskim]
+        // - 카드에 대한 소환 진행 
+        // - 서버에서만 진행
+
+        if (!IsServer) return;
+        
+        mDeck.Stack(null);
     }
 }

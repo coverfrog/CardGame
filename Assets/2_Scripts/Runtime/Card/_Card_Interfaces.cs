@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public interface ICard
 {
-    public Transform Tr { get; }
+    Transform Tr { get; }
+    
+    NetworkObject Network { get; }
     
     IObjectPool<ICard> Pool { get; set; }
     

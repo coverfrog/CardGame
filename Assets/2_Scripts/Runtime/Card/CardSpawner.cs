@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -27,8 +28,18 @@ public class CardSpawner : ICardSpawner
 
     private ICard OnCreate()
     {
-        var card = Object.Instantiate((Object)_mCardPrefab, _mParent) as ICard;
+        ICard card = null;
+        
+        if (_mCardPrefab.Network)
+        {
+            card = _mCardPrefab.Network.InstantiateAndSpawn(NetworkManager.Singleton).GetComponent<ICard>();
+        }
 
+        else
+        {
+            card = Object.Instantiate((Object)_mCardPrefab, _mParent) as ICard;
+        }
+  
         if (card != null)
         {
             card.Pool = _mPool;
