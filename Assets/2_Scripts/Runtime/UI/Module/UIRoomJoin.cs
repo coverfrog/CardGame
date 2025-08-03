@@ -1,6 +1,3 @@
-
-using System;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
@@ -49,7 +46,6 @@ public class UIRoomJoin : MonoBehaviour, IUIModule
             SetInteractable(false);
         });
     
-
         mJoinButton.interactable = true;
         mJoinButton.onClick.AddListener(() =>
         {

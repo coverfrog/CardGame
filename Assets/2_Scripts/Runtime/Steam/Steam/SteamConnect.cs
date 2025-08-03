@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Netcode.Transports.Facepunch;
 using Unity.Netcode;
@@ -10,12 +9,10 @@ using Steamworks.Data;
 
 public class SteamConnect : MonoBehaviour, ISteamClient
 {
-    private static Lobby? CurrentLobby { get; set; }
+    private static Lobby? Current { get; set; }
     
-    private bool _mIsNetLoaded;
-
-    private Action _mOnStartHostFail, _mOnStartHostSuccess;
-
+    public static int MemberCount => Current?.MemberCount ?? 0;
+    
     private IEnumerator Start()
     {
         SteamMatchmaking.OnLobbyCreated       -= OnLobbyCreated;
@@ -27,17 +24,7 @@ public class SteamConnect : MonoBehaviour, ISteamClient
         SteamFriends.OnGameLobbyJoinRequested += OnGameLobbyJoinRequested;
         
         yield return new WaitUntil(() => NetworkManager.Singleton);
-
-        _mIsNetLoaded = true;
     }
-
-    // private void OnDestroy()
-    // {
-    //     if (NetworkManager.Singleton is { IsHost: true } or { IsClient: true})
-    //     {
-    //         NetworkManager.Singleton.Shutdown();
-    //     }
-    // }
 
     private async void OnGameLobbyJoinRequested(Lobby lobby, SteamId steamId)
     {
@@ -67,20 +54,13 @@ public class SteamConnect : MonoBehaviour, ISteamClient
     
     private void OnLobbyEntered(Lobby lobby)
     {
-        CurrentLobby = lobby;
-        
-        NetworkManager.Singleton.GetComponent<FacepunchTransport>().targetSteamId = lobby.Owner.Id;
+        Current = lobby;
         
         if (NetworkManager.Singleton.IsServer) return;
         
+        NetworkManager.Singleton.GetComponent<FacepunchTransport>().targetSteamId = lobby.Owner.Id;
         NetworkManager.Singleton.StartClient();
     }
-    
-    //
-
-    public int MemberCount => CurrentLobby?.MemberCount ?? 0;
-    
-    public int MaxMembers => CurrentLobby?.MaxMembers ?? 0;
     
     //
 
@@ -91,7 +71,7 @@ public class SteamConnect : MonoBehaviour, ISteamClient
     {
         try
         {
-            if (!_mIsNetLoaded)
+            if (!NetworkManager.Singleton)
             {
                 onFail?.Invoke("Net Not Loaded");
                 
@@ -118,7 +98,7 @@ public class SteamConnect : MonoBehaviour, ISteamClient
     {
         try
         {
-            if (!_mIsNetLoaded)
+            if (!NetworkManager.Singleton)
             {
                 onFail?.Invoke("Net Not Loaded");
                 
@@ -147,14 +127,13 @@ public class SteamConnect : MonoBehaviour, ISteamClient
 
     public void Leave()
     {
-        CurrentLobby?.Leave();
-        
+        Current?.Leave();
         NetworkManager.Singleton.Shutdown();
     }
 
     public void LobbyToPrivate()
     {
-        CurrentLobby?.SetPrivate();
-        CurrentLobby?.SetJoinable(false);
+        Current?.SetPrivate();
+        Current?.SetJoinable(false);
     }
 }

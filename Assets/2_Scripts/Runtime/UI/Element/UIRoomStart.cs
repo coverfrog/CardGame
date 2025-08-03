@@ -7,10 +7,10 @@ using UnityEngine.UI;
 
 public class UIRoomStart : MonoBehaviour
 {
+    private const int MinMember = 2;
+
     [SerializeField] private Button mButton;
     [SerializeField] private TMP_Text mText;
-
-    private const int MinMember = 2;
     
     public UIRoomStart Init()
     {
@@ -19,11 +19,16 @@ public class UIRoomStart : MonoBehaviour
 
     public UIRoomStart Enter(IUIScene scene)
     {
-        bool isHost = NetworkManager.Singleton.IsHost;
+        bool isServer = NetworkManager.Singleton.IsServer;
 
-        mText.text = isHost ? "Start" : "Ready";
+        mText.text = isServer ? "Start" : "Ready";
 
-        mButton.interactable = !NetworkManager.Singleton.IsServer;
+#if false
+        mButton.interactable = !isServer;
+#else
+        mButton.interactable = true;
+#endif
+        
         mButton.onClick.RemoveAllListeners();
         mButton.onClick.AddListener(() =>
         {
@@ -47,13 +52,13 @@ public class UIRoomStart : MonoBehaviour
     
     //
 
-    public void OnReadyCountChanged(int count, int memberCount)
+    public void OnReadyCountChanged(int count)
     {
         if (!NetworkManager.Singleton.IsServer)
         {
             return;
         }
-        
-        mButton.interactable = count >= MinMember && count >= memberCount;
+
+        mButton.interactable = count >= MinMember && count >= SteamConnect.MemberCount;
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class CardDeck : MonoBehaviour, ICardDeck
@@ -58,7 +59,9 @@ public class CardDeck : MonoBehaviour, ICardDeck
 
     private void Start()
     {
+#if false
         Init();
+#endif
     }
 
     private void Update()

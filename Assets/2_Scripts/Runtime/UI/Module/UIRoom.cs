@@ -51,8 +51,8 @@ public class UIRoom : MonoBehaviour, IUIModule
         mPlayerView.OnReadyChanged(id, ready);
     }
 
-    public void OnReadyCountChanged(int count, int memberCount)
+    public void OnReadyCountChanged(int count)
     {
-        mRoomStart.OnReadyCountChanged(count, memberCount);
+        mRoomStart.OnReadyCountChanged(count);
     }
 }

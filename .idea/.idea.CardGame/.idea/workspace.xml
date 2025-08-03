@@ -5,11 +5,69 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="33ff5142-94f0-40e9-8fe5-01206183c804" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Steam/SteamConnect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2_Scripts/Steam/SteamConnect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Steam/SteamRoom.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2_Scripts/Steam/SteamRoom.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Element/UIRoomStart.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2_Scripts/UI/Element/UIRoomStart.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Module/UIRoom.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2_Scripts/UI/Module/UIRoom.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Scene/UISceneMainMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2_Scripts/UI/Scene/UISceneMainMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CardGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CardGame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/1_Scenes/1_MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scenes/1_MainMenu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/1_Scenes/2_Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scenes/2_Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Card.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Card/Card.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Card/Card.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Card/CardData.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Card/CardData.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Card/CardDeck.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Card/CardDeck.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Card/CardDeckData.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Card/CardDeckData.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Card/CardShuffler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Card/CardShuffler.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Card/CardSpawner.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Card/CardSpawner.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Card/CardStacker.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Card/CardStacker.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Card/_Card_Interfaces.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Card/_Card_Interfaces.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Player.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Player/Player.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Player/Player.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Player/_Player_Interfaces.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Player/_Player_Interfaces.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Steam.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Steam/SteamConnect.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Steam/SteamConnect.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Steam/SteamRoom.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Steam/SteamRoom.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Steam/_Steam_Interfaces.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Steam/_Steam_Interfaces.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Element.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Element/UIRoomExit.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Element/UIRoomExit.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Element/UIRoomId.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Element/UIRoomId.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Element/UIRoomPlayer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Element/UIRoomPlayer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Element/UIRoomPlayerView.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Element/UIRoomPlayerView.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Element/UIRoomStart.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Element/UIRoomStart.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Module.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Module/UIFade.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Module/UIFade.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Module/UIModeSelector.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Module/UIModeSelector.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Module/UIRoom.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Module/UIRoom.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Module/UIRoomJoin.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Module/UIRoomJoin.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Module/UIToast.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Module/UIToast.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Scene.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Scene/UISceneMainMenu.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/Scene/UISceneMainMenu.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/_UI_Interfaces.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/UI/_UI_Interfaces.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Util.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Util/Singleton.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2_Scripts/Util/Singleton.cs.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,29 +77,33 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 2
-}]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/2_Scripts/Editor/Scene/SceneBeginSelector.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/2_Scripts/Editor/Scene/_Scene_Editor_Interfaces.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="30iqYNMoVdvViHPcf27sziLMxMk" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Multi-Game-Begin&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Unity 에디터에 연결.Unity 에디터에 연결">
     <configuration name="유닛 테스트(배치 모드)" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.54f1\Editor\Unity.exe" />
@@ -112,7 +174,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1754120790194</updated>
-      <workItem from="1754120791629" duration="629000" />
+      <workItem from="1754120791629" duration="2983000" />
+      <workItem from="1754212826132" duration="3491000" />
     </task>
     <servers />
   </component>

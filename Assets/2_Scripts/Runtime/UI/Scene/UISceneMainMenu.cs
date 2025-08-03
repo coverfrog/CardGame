@@ -1,17 +1,14 @@
-using System;
 using Steamworks;
 using Steamworks.Data;
-using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class UISceneMainMenu : MonoBehaviour, IUIScene
 {
-    [Header("[ References ]")]
+    [Header("[ Steam ]")]
     [SerializeField] private SteamConnect mSteamConnect;
     [SerializeField] private SteamRoom mSteamRoom;
     
-    [Header("[ References ]")]
+    [Header("[ UI ]")]
     [SerializeField] private UIModeSelector mModeSelector;
     [SerializeField] private UIRoomJoin mRoomJoin;
     [SerializeField] private UIRoom mRoom;
@@ -104,7 +101,7 @@ public class UISceneMainMenu : MonoBehaviour, IUIScene
     
     private void OnReadyCountChanged(int count)
     {
-        mRoom.OnReadyCountChanged(count, mSteamConnect.MemberCount);
+        mRoom.OnReadyCountChanged(count);
     }
     
     public void GameStart()

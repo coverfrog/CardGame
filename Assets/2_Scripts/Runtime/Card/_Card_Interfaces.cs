@@ -40,4 +40,7 @@ public interface ICardStacker
     void Stack(ICardSpawner spawner, List<CardData> dataList, Action onStack);
 }
 
-
+public interface ICardSystem
+{
+    
+}

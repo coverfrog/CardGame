@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public interface IUIScene 
 {
     IUIScene Init();
