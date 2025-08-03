@@ -46,7 +46,6 @@ public class Card : NetworkBehaviour, ICard
         Data = data;
 
         gameObject.name = Data.DisplayName;
-
         mCodeName = data.CodeName;
         
         mRender.sharedMaterial = new Material(mShader);
@@ -55,8 +54,15 @@ public class Card : NetworkBehaviour, ICard
         return this;
     }
 
-    public override void OnNetworkSpawn()
+    /// <summary>
+    /// 네트워크 단계에서 값을 다시 초기화
+    /// </summary>
+    [Rpc(SendTo.NotServer)]
+    public void Init_Net_Rpc(
+        FixedString128Bytes codeName,
+        FixedString128Bytes displayName)
     {
-        Debug.Log("클라에서도 호출?");
+        gameObject.name = displayName.Value;
+        mCodeName = codeName.Value;
     }
 }

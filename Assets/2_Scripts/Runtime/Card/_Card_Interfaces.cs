@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -15,6 +16,10 @@ public interface ICard
     IObjectPool<ICard> Pool { get; set; }
     
     ICard Init(CardData data);
+
+    void Init_Net_Rpc(
+        FixedString128Bytes codeName,
+        FixedString128Bytes displayName);
 }
 
 public interface ICardDeck

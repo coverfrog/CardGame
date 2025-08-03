@@ -71,15 +71,18 @@ public class CardSystem : NetworkBehaviour, ICardSystem
             return;
         }
         
-        mDeck.Spawn((idx, id) =>
+        mDeck.Spawn(list =>
         {
-            // [25.08.03][cskim]
-            // - 소환이 끝난 시점에서 소환된 카드들에 대한 정보가 일부 필요
-            //      - 인덱스
-            //      - 코드네임
-            // - data 에 대한 순서는 보장 
-            //      - 소환 된 객체에 대한 역시 순서가 보장 
-            // - server 에서 1차적으로 데이터 저장이 되어야함
+            // [][]
+            foreach (ICard card in list)
+            {
+                string codeName = card.Data.CodeName;
+                string displayName = card.Data.DisplayName;
+                
+                card.Init_Net_Rpc(
+                    new FixedString128Bytes(codeName),
+                    new FixedString128Bytes(displayName));
+            }
         });
     }
 }

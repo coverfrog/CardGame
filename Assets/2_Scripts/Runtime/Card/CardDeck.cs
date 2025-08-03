@@ -77,7 +77,7 @@ public class CardDeck : MonoBehaviour, ICardDeck
     /// <summary>
     /// 소환
     /// </summary>
-    public void Spawn(Action<int, ulong> onSpawn)
+    public void Spawn(Action<List<ICard>> onSpawn)
     {
         // [25.08.03][cskim]
         // - 소환하는 구간
@@ -93,12 +93,10 @@ public class CardDeck : MonoBehaviour, ICardDeck
         {
             ICard card = Spawner.Get(_mCardDataList[i]);
 
-            ulong id = card.Network.NetworkObjectId;
-            
-            onSpawn?.Invoke(i, id);
-            
             _mCardList.Add(card);
         }
+        
+        onSpawn?.Invoke(_mCardList);
     }
 
     /// <summary>
