@@ -67,7 +67,7 @@ public class Card : NetworkBehaviour, ICard
 
     public override void OnNetworkSpawn()
     {
-        if (!IsServer)
+        if (IsServer)
         {
             return;
         }
