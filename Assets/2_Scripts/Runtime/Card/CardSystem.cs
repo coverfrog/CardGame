@@ -32,21 +32,28 @@ public class CardSystem : NetworkBehaviour, ICardSystem
     {
         // [25.08.03][cskim]
         // - 덱 정보 초기화는 서버가 혼자 진행 해야함 ( 동일한 데이터여야 하므로 )
-        // - 그 데이터를 다른 클라에서도 받을 수 있게끔 전송
+        // - 그 데이터를 다른 클라에서도 받을 수 있게끔 전송 
         
-        var cardCodeNames = mDeck
+        var codeNameBytes = mDeck
             .Shuffle()
             .Select(d => new FixedString128Bytes(d.CodeName))
             .ToArray();
         
-        Deck_Shuffle_Rpc(cardCodeNames);
+        Deck_Shuffle_Rpc(codeNameBytes);
     }
     //
     [Rpc(SendTo.ClientsAndHost)]
-    private void Deck_Shuffle_Rpc(FixedString128Bytes[] names)
+    private void Deck_Shuffle_Rpc(FixedString128Bytes[] codeNameBytes)
     {
-        mCardNames = names
+        // [25.08.03][cskim]
+        // - 시점 : 카드 정보 갱신을 완료 
+        // - 덱을 스폰
+        // - 카드는 서버에서만 소환 ( 코드 네임 기반으로 정보 전달 )
+        
+        string[] codeNames = codeNameBytes
             .Select(n => n.Value)
             .ToArray();
+
+        mDeck.OnShuffle(codeNames);
     }
 }
