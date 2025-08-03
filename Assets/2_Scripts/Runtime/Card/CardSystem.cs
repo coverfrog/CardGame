@@ -14,11 +14,16 @@ public class CardSystem : NetworkBehaviour, ICardSystem
     
     public override void OnNetworkSpawn()
     {
+        // 초기 값 
+        mDeck.Init();
+        
         // 호스트인 경우에만 
         if (!IsServer)
         {
             return;
         }
+        
+        
         
         // 로그
 #if true
@@ -56,13 +61,19 @@ public class CardSystem : NetworkBehaviour, ICardSystem
         mDeck.OnShuffle(codeNames);
         
         // [25.08.03][cskim]
-        // - 카드에 대한 소환 진행 
+        // - 카드에 대한 소환'만' 진행
+        //      - 그 안에 정보에 대한 초기화는 클라 전부가 알아야 한다.
+        // - 소환은 공용 객체로 동작
+        // - 다만, 카드 안에 어떠한 데이터에 대한 동작은 클라이언트 전부가 알아야함
         
         if (!IsServer)
         {
             return;
         }
         
-        mDeck.Spawn();
+        mDeck.Spawn(() =>
+        {
+            
+        });
     }
 }

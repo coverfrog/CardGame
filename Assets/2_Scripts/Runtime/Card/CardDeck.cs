@@ -14,7 +14,10 @@ public class CardDeck : MonoBehaviour, ICardDeck
 
     [Title("Debug View")]
     [ShowInInspector, ReadOnly] private List<CardData> _mCardDataList;
+    [ShowInInspector, ReadOnly] private List<ICard> _mCardList;
 
+    private Dictionary<string, CardData> _mCardDataDictionary;
+    
     #region > ICardDeck
 
     public ICardSpawner Spawner { get; private set; }
@@ -23,14 +26,15 @@ public class CardDeck : MonoBehaviour, ICardDeck
 
     public ICardStacker Stacker { get; private set; }
 
+    /// <summary>
+    /// 초기화
+    /// </summary>
     public void Init()
     {
-        if (!mPrefab)
-        {
-            throw new NullReferenceException("Card prefab is null");    
-        }
-        
-  
+        _mCardDataDictionary = mDeckData
+            .OptionList
+            .Select(o => o.CardData)
+            .ToDictionary(d => d.CodeName, d => d);
     }
 
     /// <summary>
@@ -64,32 +68,34 @@ public class CardDeck : MonoBehaviour, ICardDeck
 
         _mCardDataList = new List<CardData>(codeNames.Length);
         
-        var dictionary = mDeckData
-            .OptionList
-            .Select(o => o.CardData)
-            .ToDictionary(d => d.CodeName, d => d);
-
         foreach (string codeName in codeNames)
         {
-            _mCardDataList.Add(dictionary[codeName]);
+            _mCardDataList.Add(_mCardDataDictionary[codeName]);
         }
     }
 
     /// <summary>
     /// 소환
     /// </summary>
-    public void Spawn()
+    public void Spawn(Action onEnd)
     {
         // [25.08.03][cskim]
         // - 소환하는 구간
-        // - 소환은 서버에서만 하게 강제 할 것 
+        // - 소환'만' 진행 할 것 
+        // - 서버는 현재 카드에 대한 정보를 들고 있어야 한다.
 
         Spawner = new CardSpawner(transform, mPrefab);
+
+        int count = _mCardDataList.Count;
         
-        foreach (CardData data in _mCardDataList)
+        _mCardList = new List<ICard>(count);
+
+        for (int i = 0; i < count; i++)
         {
-            ICard card = Spawner.Get(data);
+            _mCardList.Add(Spawner.Get(_mCardDataList[i]));
         }
+        
+        onEnd?.Invoke();
     }
 
     /// <summary>

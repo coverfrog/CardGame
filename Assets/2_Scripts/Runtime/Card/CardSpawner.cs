@@ -28,18 +28,8 @@ public class CardSpawner : ICardSpawner
 
     private ICard OnCreate()
     {
-        ICard card = null;
+        var card = Object.Instantiate((Object)_mCardPrefab, _mParent) as ICard;
         
-        if (_mCardPrefab.Network)
-        {
-            card = _mCardPrefab.Network.InstantiateAndSpawn(NetworkManager.Singleton).GetComponent<ICard>();
-        }
-
-        else
-        {
-            card = Object.Instantiate((Object)_mCardPrefab, _mParent) as ICard;
-        }
-  
         if (card != null)
         {
             card.Pool = _mPool;
@@ -67,7 +57,15 @@ public class CardSpawner : ICardSpawner
 
     #region > ICardSpawner
 
-    public ICard Get(CardData data) => _mPool?.Get().Init(data);
-    
+    public ICard Get(CardData data)
+    {
+        ICard card = _mPool?.Get();
+
+        card?.Init(data);
+        card?.Network?.Spawn();
+        
+        return card;
+    }
+
     #endregion
 }
